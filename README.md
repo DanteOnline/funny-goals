@@ -1,0 +1,2 @@
+# funny-goals
+Goals management
