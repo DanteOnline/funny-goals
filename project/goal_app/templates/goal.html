@@ -1,0 +1,61 @@
+{% extends "main.html" %}
+{% block title %}
+    {{object.name}}
+{% endblock %}
+{% block content %}
+    <h1>{{object.name}}</h1>
+    <div class="panel {% if not object.has_refs_in_control %}panel-warning{%else%}panel-info{%endif%}">
+        <div class="panel-heading">
+            Выполнена
+        </div>
+        <div class="panel-body">
+            {{object.is_success}}
+        </div>
+        <div class="panel-heading">
+            Под контролем
+        </div>
+        <div class="panel-body">
+            {{object.in_control}}
+        </div>
+        {% if not object.in_control %}
+            <div class="panel-heading">
+                Связанные цели под контолем
+            </div>
+            <div class="panel-body">
+                <ul class="list-group">
+                    {% for ref in object.get_refs_in_control %}
+                        <a href="{% url 'goal' pk=ref.pk %}"
+                       class="list-group-item
+                    {% if object.is_success %}
+                        list-group-item-success
+                    {% elif not object.has_refs_in_control %}
+                        list-group-item-warning
+                    {% endif %}"
+                    >
+                        {{object.name}} &nbsp;
+                        ({{object.get_type}})
+                    </a>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+        <div class="panel-heading">
+            Тип
+        </div>
+        <div class="panel-body">
+            {{object.get_type}}
+        </div>
+        <div class="panel-heading">
+            Почему важна
+        </div>
+        <div class="panel-body">
+            {{object.why_important}}
+        </div>
+        <div class="panel-heading">
+            Личная цель
+        </div>
+        <div class="panel-body">
+            {{object.is_personal}}
+        </div>
+    </div>
+{% endblock %}

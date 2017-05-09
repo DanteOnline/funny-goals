@@ -1,0 +1,7 @@
+{% extends "main_list.html" %}
+{% block caption %}
+   <h1>Категории</h1>
+{% endblock %}
+{% block object %}
+    <a href="{% url 'goal_list' category_id=object.pk goal_time='TD' %}" class="list-group-item">{{object.priority}}) {{object.name}}</a>
+{% endblock %}

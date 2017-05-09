@@ -1,0 +1,32 @@
+{% extends "main_list.html" %}
+{% block caption %}
+    <h1>{{category.name}}</h1>
+    <ul class="nav nav-tabs">
+      <li {% if tm == 'TD' %}class="active"{% endif %}>
+          <a href="{% url 'goal_list' category_id=category.pk goal_time='TD' %}">На сегодня</a>
+      </li>
+      <li {% if tm == 'SH' %}class="active"{% endif %}>
+          <a href="{% url 'goal_list' category_id=category.pk goal_time='SH' %}">Краткосрочные</a>
+      </li>
+      <li {% if tm == 'MD' %}class="active"{% endif %}>
+          <a href="{% url 'goal_list' category_id=category.pk goal_time='MD' %}">Среднесрочные</a>
+      </li>
+      <li {% if tm == 'LG' %}class="active"{% endif %}>
+          <a href="{% url 'goal_list' category_id=category.pk goal_time='LG' %}">Долгосрочные</a>
+      </li>
+    </ul>
+    <p></p>
+{% endblock %}
+{% block object %}
+    <a href="{% url 'goal' pk=object.pk %}"
+       class="list-group-item
+    {% if object.is_success %}
+        list-group-item-success
+    {% elif not object.has_refs_in_control %}
+        list-group-item-warning
+    {% endif %}"
+    >
+        {{object.name}} &nbsp;
+        ({{object.get_type}})
+    </a>
+{% endblock %}

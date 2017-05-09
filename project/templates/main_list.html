@@ -1,0 +1,13 @@
+{% extends "main.html" %}
+{% block content %}
+    {% block caption %}{% endblock %}
+    <ul class="list-group">
+        {% for object in object_list %}
+            {% block object %}
+                <li class="list-group-item">
+                    {{object}}
+                </li>
+            {% endblock %}
+        {% endfor %}
+    </ul>
+{% endblock %}
